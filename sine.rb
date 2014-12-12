@@ -27,7 +27,7 @@ class ChangeServer
   end
 end
 
-class Sine < Sinatra::Application
+class Sine < Sinatra::Base
 
   use ChangeServer
 
