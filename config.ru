@@ -1,2 +1,2 @@
-require './main'
+require './sine'
 run Sine
