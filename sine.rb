@@ -11,11 +11,11 @@ SERVER_NAME = "better than urs" # shows up on HTTP headers
 
 # End Config Variables
 
-images = []
+$images = []
 Dir.foreach(IMAGE_DIRECTORY) do |f|
   next if File.directory?(f) # if f is a directory, skip it
   next unless IMAGE_EXTENSIONS.include? File.extname(f) # if f does not match one of the extensions, skip it
-  images << f
+  $images << f
 end
 
 require 'sinatra'
@@ -48,5 +48,5 @@ not_found do
 end
 
 def get_image
-  images.sample # choose random image
+  $images.sample # choose random image
 end
