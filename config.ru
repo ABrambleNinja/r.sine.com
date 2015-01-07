@@ -1,2 +1,0 @@
-require './sine'
-run Sine
