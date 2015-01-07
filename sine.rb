@@ -8,6 +8,7 @@
 IMAGE_DIRECTORY = "images"
 IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.gif', '.png']
 SERVER_NAME = "better than urs" # shows up on HTTP headers
+NOT_FOUND = "noneed.gif" # image to display on 404
 
 # End Config Variables
 
@@ -39,14 +40,18 @@ use ChangeServer
 get '/' do
   image = get_image
   content_type MIME::Types.of(image).first.content_type
-  File.open("./#{IMAGE_DIRECTORY}/#{image}").read # send image to user
+  send_image(image)
 end
 
 not_found do
-  content_type "text/plain"
-  "no u"
+  content_type MIME::Types.of(NOT_FOUND).first.content_type
+  send_image(NOT_FOUND)
 end
 
 def get_image
   $images.sample # choose random image
+end
+
+def send_image image
+  File.open("#{Dir.pwd}/#{IMAGE_DIRECTORY}/#{image}").read # send image to user
 end
