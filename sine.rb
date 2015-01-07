@@ -39,12 +39,19 @@ use ChangeServer
 
 get '/' do
   image = get_image
-  content_type MIME::Types.of(image).first.content_type
   send_image(image)
 end
 
+get '/:image' do
+  if File.exist? IMAGE_DIRECTORY + "/" + params[:image]
+    send_image params[:image]
+  else
+    halt 404
+  end
+end
+
 not_found do
-  content_type MIME::Types.of(NOT_FOUND).first.content_type
+  status 404
   send_image(NOT_FOUND)
 end
 
@@ -53,5 +60,6 @@ def get_image
 end
 
 def send_image image
+  content_type MIME::Types.of(image).first.content_type
   File.open("#{Dir.pwd}/#{IMAGE_DIRECTORY}/#{image}").read # send image to user
 end
