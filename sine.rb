@@ -18,7 +18,7 @@ Dir.foreach(IMAGE_DIRECTORY) do |f|
   images << f
 end
 
-require 'sinatra/base'
+require 'sinatra'
 require 'thin'
 require 'mime/types'
 
