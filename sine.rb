@@ -39,7 +39,7 @@ use ChangeServer
 
 get '/' do
   image = get_image
-  send_image(image)
+  send_image image
 end
 
 get '/:image' do
@@ -52,7 +52,7 @@ end
 
 not_found do
   status 404
-  send_image(NOT_FOUND)
+  send_image NOT_FOUND
 end
 
 def get_image
